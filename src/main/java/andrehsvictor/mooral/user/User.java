@@ -62,6 +62,11 @@ public class User implements Serializable {
     private String providerId;
 
     @Builder.Default
+    @Column(name = "plan", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserPlan plan = UserPlan.FREE;
+
+    @Builder.Default
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified = false;
 
