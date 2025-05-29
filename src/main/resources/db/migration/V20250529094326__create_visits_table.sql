@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS visits (
+    id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    visited_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(45),
+    user_agent VARCHAR(255),
+    country VARCHAR(100),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
