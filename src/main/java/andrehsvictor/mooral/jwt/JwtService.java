@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.UUID;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -16,7 +15,8 @@ import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import andrehsvictor.camly.exception.UnauthorizedException;
+import andrehsvictor.mooral.exception.BadRequestException;
+import andrehsvictor.mooral.exception.UnauthorizedException;
 import andrehsvictor.mooral.user.User;
 import lombok.RequiredArgsConstructor;
 
