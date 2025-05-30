@@ -51,6 +51,8 @@ public class MinioConfig {
     private void setupBucketPolicy(MinioClient minioClient) {
         try {
             String bucketPolicy = classpathFileService.getContent("static/bucket-policy.json");
+            bucketPolicy = bucketPolicy
+                    .replace("{{bucketName}}", minioProperties.getBucket().get("name"));
             SetBucketPolicyArgs setBucketPolicyArgs = SetBucketPolicyArgs.builder()
                     .bucket(minioProperties.getBucket().get("name"))
                     .config(bucketPolicy)
