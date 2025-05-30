@@ -13,6 +13,10 @@ public class UpdateAccountDto {
     @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username can only contain letters, numbers and underscores")
     private String username;
 
+    @Size(max = 100, message = "Email must not exceed 100 characters")
+    @Pattern(regexp = "^[\\w-\\.]+@[\\w-]+\\.[a-zA-Z]{2,}$", message = "Email must be valid")
+    private String email;
+
     @Size(max = 255, message = "Picture URL must not exceed 255 characters")
     private String pictureUrl;
 }
