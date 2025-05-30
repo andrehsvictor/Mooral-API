@@ -32,6 +32,14 @@ spring:
           starttls:
             enable: true
     test-connection: false
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST:/}
+    publisher-returns: true
+
   servlet:
     multipart:
       max-file-size: 10MB
@@ -40,7 +48,7 @@ spring:
 logging:
   level:
     root: INFO
-    "[andrehsvictor.camly]": DEBUG
+    "[andrehsvictor.mooral]": DEBUG
     "[org.hibernate.SQL]": WARN
     "[org.springframework.security]": INFO
 
