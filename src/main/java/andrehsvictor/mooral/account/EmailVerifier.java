@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class EmailVerifier {
 
     private static final String EMAIL_TEMPLATE_PATH = "templates/verify-email.html";
-    private static final String EMAIL_SUBJECT = "Verify your email";
+    private static final String EMAIL_SUBJECT = "Verifique seu e-mail na Mooral";
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final int TOKEN_BYTES_LENGTH = 32;
 
@@ -70,11 +70,11 @@ public class EmailVerifier {
         long minutes = duration.toMinutesPart();
 
         if (hours > 0) {
-            String hourText = hours + (hours == 1 ? " hour" : " hours");
-            return minutes > 0 ? hourText + " and " + minutes + (minutes == 1 ? " minute" : " minutes") : hourText;
+            String hourText = hours + (hours == 1 ? " hora" : " horas");
+            return minutes > 0 ? hourText + " e " + minutes + (minutes == 1 ? " minuto" : " minutos") : hourText;
         } else {
             long totalMinutes = duration.toMinutes();
-            return totalMinutes + (totalMinutes == 1 ? " minute" : " minutes");
+            return totalMinutes + (totalMinutes == 1 ? " minuto" : " minutos");
         }
     }
 
