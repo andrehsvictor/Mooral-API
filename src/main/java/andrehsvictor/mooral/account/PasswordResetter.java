@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class PasswordResetter {
 
     private static final String EMAIL_TEMPLATE_PATH = "templates/reset-password.html";
-    private static final String EMAIL_SUBJECT = "Reset your password";
+    private static final String EMAIL_SUBJECT = "Redefina sua senha - Mooral";
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final int TOKEN_BYTES_LENGTH = 32;
 
@@ -69,11 +69,11 @@ public class PasswordResetter {
         long minutes = duration.toMinutesPart();
 
         if (hours > 0) {
-            String hourText = hours + (hours == 1 ? " hour" : " hours");
-            return minutes > 0 ? hourText + " and " + minutes + (minutes == 1 ? " minute" : " minutes") : hourText;
+            String hourText = hours + (hours == 1 ? " hora" : " horas");
+            return minutes > 0 ? hourText + " and " + minutes + (minutes == 1 ? " minuto" : " minutos") : hourText;
         } else {
             long totalMinutes = duration.toMinutes();
-            return totalMinutes + (totalMinutes == 1 ? " minute" : " minutes");
+            return totalMinutes + (totalMinutes == 1 ? " minuto" : " minutos");
         }
     }
 

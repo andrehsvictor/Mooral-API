@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class EmailVerifier {
 
     private static final String EMAIL_TEMPLATE_PATH = "templates/verify-email.html";
-    private static final String EMAIL_SUBJECT = "Verifique seu e-mail na Mooral";
+    private static final String EMAIL_SUBJECT = "Verifique seu e-mail - Mooral";
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final int TOKEN_BYTES_LENGTH = 32;
 
