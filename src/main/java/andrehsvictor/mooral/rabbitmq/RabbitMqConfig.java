@@ -10,15 +10,15 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfig {
 
     @Bean
-    Queue imageDeletionQueue() {
-        return new Queue("images.v1.deletion", true, false, false);
+    Queue imageDeleteQueue() {
+        return new Queue("images.v1.delete", true, false, false);
     }
 
     @Bean
     RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
         rabbitAdmin.setAutoStartup(true);
-        rabbitAdmin.declareQueue(imageDeletionQueue());
+        rabbitAdmin.declareQueue(imageDeleteQueue());
         return rabbitAdmin;
     }
 
