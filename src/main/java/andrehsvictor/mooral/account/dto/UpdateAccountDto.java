@@ -17,6 +17,7 @@ public class UpdateAccountDto {
     @Pattern(regexp = "^[\\w-\\.]+@[\\w-]+\\.[a-zA-Z]{2,}$", message = "Email must be valid")
     private String email;
 
+    @Pattern(regexp = "^(https?://.*\\.(?:png|jpg|jpeg)$)", message = "Picture URL must be a valid URL ending with .png, .jpg, or .jpeg")
     @Size(max = 255, message = "Picture URL must not exceed 255 characters")
     private String pictureUrl;
 }

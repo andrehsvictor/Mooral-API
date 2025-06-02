@@ -18,6 +18,7 @@ import andrehsvictor.mooral.account.dto.UpdatePasswordDto;
 import andrehsvictor.mooral.account.dto.VerifyEmailDto;
 import andrehsvictor.mooral.exception.BadRequestException;
 import andrehsvictor.mooral.exception.ResourceConflictException;
+import andrehsvictor.mooral.image.ImageService;
 import andrehsvictor.mooral.jwt.JwtService;
 import andrehsvictor.mooral.user.User;
 import andrehsvictor.mooral.user.UserProvider;
@@ -35,6 +36,7 @@ public class AccountService {
     private final JwtService jwtService;
     private final EmailVerifier emailVerifier;
     private final PasswordResetter passwordResetter;
+    private final ImageService imageService;
 
     @Cacheable(key = "#root.method.name + '_' + @jwtService.getCurrentUserId()")
     public AccountDto get() {
@@ -63,12 +65,21 @@ public class AccountService {
         User user = getCurrentUser();
         String newEmail = updateAccountDto.getEmail();
         String newUsername = updateAccountDto.getUsername();
+        String newPictureUrl = updateAccountDto.getPictureUrl();
 
         validateFieldUpdates(user, newEmail, newUsername);
+
+        String oldPictureUrl = user.getPictureUrl();
 
         accountMapper.updateUserFromUpdateAccountDto(updateAccountDto, user);
         user.setUpdatedAt(LocalDateTime.now());
         userService.save(user);
+
+        if (newPictureUrl != null &&
+                oldPictureUrl != null &&
+                !newPictureUrl.equals(oldPictureUrl)) {
+            imageService.delete(oldPictureUrl);
+        }
 
         return accountMapper.userToAccountDto(user);
     }
@@ -80,7 +91,9 @@ public class AccountService {
             @CacheEvict(key = "'existsByEmail_' + #email", cacheNames = "users")
     })
     public void delete() {
+        User user = getCurrentUser();
         userService.deleteById(jwtService.getCurrentUserId());
+        imageService.delete(user.getPictureUrl());
     }
 
     @Caching(evict = {
