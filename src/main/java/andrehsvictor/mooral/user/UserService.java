@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import andrehsvictor.mooral.exception.ResourceNotFoundException;
-import andrehsvictor.mooral.jwt.JwtService;
 import andrehsvictor.mooral.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 
@@ -22,12 +21,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final JwtService jwtService;
 
     @Cacheable(key = "'userById_' + #id")
     public User getById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "ID", id));
+    }
+
+    @Cacheable(key = "'userByUsername_' + #username")
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
     }
 
     @Cacheable(key = "'userByEmail_' + #email")
@@ -60,21 +64,6 @@ public class UserService {
             case PASSWORD_RESET -> userRepository.findByResetPasswordToken(token)
                     .orElseThrow(() -> new ResourceNotFoundException("Password reset token not found"));
         };
-    }
-
-    @Transactional
-    @Caching(evict = {
-            @CacheEvict(key = "'userByUsername_' + #username", condition = "@userRepository.existsByUsername(#username)")
-    })
-    public void incrementMuralVisitsCount(String username) {
-        UUID currentUserId = jwtService.getCurrentUserId();
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-        if (user.getId().equals(currentUserId)) {
-            return;
-        }
-        user.incrementMuralVisitsCount();
-        userRepository.save(user);
     }
 
     public UserDto toDto(User user) {
