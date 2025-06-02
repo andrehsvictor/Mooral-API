@@ -62,11 +62,15 @@ public class UserService {
         };
     }
 
+    @Transactional
+    @Caching(evict = {
+            @CacheEvict(key = "'userByUsername_' + #username", condition = "@userRepository.existsByUsername(#username)")
+    })
     public void incrementMuralVisitsCount(String username) {
+        UUID currentUserId = jwtService.getCurrentUserId();
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-        UUID userId = jwtService.getCurrentUserId();
-        if (user.getId().equals(userId)) {
+        if (user.getId().equals(currentUserId)) {
             return;
         }
         user.incrementMuralVisitsCount();
