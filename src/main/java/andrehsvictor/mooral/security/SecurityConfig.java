@@ -51,7 +51,7 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
             "/actuator/health",
-            "/actuator/info",
+            "/actuator/prometheus",
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/swagger-ui.html"
@@ -77,7 +77,6 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.POST, PUBLIC_POST_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, PUBLIC_GET_ENDPOINTS).permitAll()
-                        .requestMatchers("/actuator/prometheus").hasRole("PROMETHEUS")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt
