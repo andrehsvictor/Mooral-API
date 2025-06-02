@@ -39,3 +39,4 @@ build/
 keys/
 certs/
 application-dev.yml
+prometheus.yml
