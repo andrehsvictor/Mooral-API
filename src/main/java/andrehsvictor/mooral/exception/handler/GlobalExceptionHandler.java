@@ -78,7 +78,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
     }
 
-    @ExceptionHandler({UnauthorizedException.class, AuthenticationException.class})
+    @ExceptionHandler({ UnauthorizedException.class, AuthenticationException.class })
     public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException e) {
         log.warn("Unauthorized access: {}", e.getMessage());
         ErrorResponse errorResponse = ErrorResponse.builder()
@@ -108,7 +108,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatusCode status,
             WebRequest request) {
-        
+
         List<ValidationError> validationErrors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -136,14 +136,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatusCode status,
             WebRequest request) {
-        
+
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message("Missing required parameter: " + ex.getParameterName())
                 .timestamp(LocalDateTime.now())
                 .correlationId(UUID.randomUUID().toString())
                 .build();
-        
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
@@ -161,7 +161,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex,
-                HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         log.warn("File size exceeded: {}", ex.getMessage());
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(HttpStatus.PAYLOAD_TOO_LARGE.value())
