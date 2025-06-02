@@ -44,7 +44,7 @@ public class Post implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "content", nullable = false, length = 500)
+    @Column(name = "content", length = 500)
     private String content;
 
     @Column(name = "image_url")
@@ -65,6 +65,10 @@ public class Post implements Serializable {
     @PreUpdate
     void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public UUID getUserId() {
+        return user.getId();
     }
 
 }
