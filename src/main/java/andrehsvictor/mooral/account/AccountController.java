@@ -44,14 +44,14 @@ public class AccountController {
 
     @Operation(summary = "Send action email", description = "Sends an email for account verification or password reset")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Email sent successfully"),
+            @ApiResponse(responseCode = "204", description = "Email sent successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid request data", content = @Content),
             @ApiResponse(responseCode = "404", description = "Email not found", content = @Content)
     })
     @PostMapping("/api/v1/account/send-action-email")
     public ResponseEntity<Void> sendActionEmail(@Valid @RequestBody SendActionEmailDto sendActionEmailDto) {
         accountService.sendActionEmail(sendActionEmailDto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Verify email address", description = "Validates email verification token and marks the account as verified")
