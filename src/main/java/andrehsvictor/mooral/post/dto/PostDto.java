@@ -1,6 +1,5 @@
 package andrehsvictor.mooral.post.dto;
 
-import andrehsvictor.mooral.user.dto.UserDto;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +8,6 @@ import lombok.Data;
 public class PostDto {
 
     private String id;
-    private UserDto user;
     private String content;
     private String imageUrl;
     private Integer viewsCount;
