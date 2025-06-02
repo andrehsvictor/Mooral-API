@@ -14,8 +14,8 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${spring.mail.username:noreply@mooral.io}")
-    private String from = "noreply@mooral.io";
+    @Value("${spring.mail.username")
+    private String from;
 
     public void send(String to, String subject, String text) {
         MimeMessage message = mailSender.createMimeMessage();

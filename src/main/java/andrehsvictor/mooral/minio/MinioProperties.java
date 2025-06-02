@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "camly.minio")
+@ConfigurationProperties(prefix = "mooral.minio")
 public class MinioProperties {
 
     private Map<String, String> admin;

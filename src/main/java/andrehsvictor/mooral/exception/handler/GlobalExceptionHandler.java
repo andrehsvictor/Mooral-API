@@ -79,11 +79,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({UnauthorizedException.class, AuthenticationException.class})
-    public ResponseEntity<ErrorResponse> handleUnauthorizedException(RuntimeException e) {
+    public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException e) {
         log.warn("Unauthorized access: {}", e.getMessage());
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(HttpStatus.UNAUTHORIZED.value())
-                .message("Authentication required")
+                .message(e.getMessage())
                 .timestamp(LocalDateTime.now())
                 .correlationId(UUID.randomUUID().toString())
                 .build();
@@ -100,18 +100,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .correlationId(UUID.randomUUID().toString())
                 .build();
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
-    }
-
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ErrorResponse> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
-        log.warn("File size exceeded: {}", e.getMessage());
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .status(HttpStatus.PAYLOAD_TOO_LARGE.value())
-                .message("File size exceeds maximum allowed limit")
-                .timestamp(LocalDateTime.now())
-                .correlationId(UUID.randomUUID().toString())
-                .build();
-        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(errorResponse);
     }
 
     @Override
@@ -169,5 +157,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .correlationId(UUID.randomUUID().toString())
                 .build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex,
+                HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        log.warn("File size exceeded: {}", ex.getMessage());
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(HttpStatus.PAYLOAD_TOO_LARGE.value())
+                .message("File size exceeds maximum allowed limit")
+                .timestamp(LocalDateTime.now())
+                .correlationId(UUID.randomUUID().toString())
+                .build();
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(errorResponse);
     }
 }

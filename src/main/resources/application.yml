@@ -2,7 +2,7 @@ spring:
   application:
     name: mooral
   profiles:
-    active: @spring.profiles.active@
+    active: dev
   threads:
     virtual:
       enabled: true

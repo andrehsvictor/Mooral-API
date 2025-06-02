@@ -2,8 +2,9 @@ package andrehsvictor.mooral.image;
 
 import java.util.Map;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,9 +34,9 @@ public class ImageController {
             @ApiResponse(responseCode = "413", description = "File size exceeds maximum limit", content = @Content)
     })
     @SecurityRequirement(name = "bearerAuth")
-    @PostMapping("/api/v1/images")
+    @PostMapping(value = "/api/v1/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String, String> upload(
-            @Parameter(description = "Image file to upload (PNG, JPG, JPEG - maximum 10MB)", required = true) @RequestParam("file") MultipartFile file) {
+            @Parameter(description = "Image file to upload", required = true, content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE)) @RequestPart("file") MultipartFile file) {
         String imageUrl = imageService.upload(file);
         return Map.of("url", imageUrl);
     }
