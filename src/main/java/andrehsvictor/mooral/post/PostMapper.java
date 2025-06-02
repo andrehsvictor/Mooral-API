@@ -9,9 +9,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import andrehsvictor.mooral.post.dto.CreatePostDto;
 import andrehsvictor.mooral.post.dto.PostDto;
 import andrehsvictor.mooral.post.dto.UpdatePostDto;
-import andrehsvictor.mooral.user.UserMapper;
 
-@Mapper(componentModel = "spring", uses = { UserMapper.class })
+@Mapper(componentModel = "spring")
 public interface PostMapper {
 
     PostDto postToPostDto(Post post);
