@@ -79,7 +79,7 @@ public class JwtService {
     public UUID getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof JwtAuthenticationToken)) {
-            throw new UnauthorizedException("No JWT authentication found in security context");
+            return null; // Anonymous user or not authenticated
         }
 
         Jwt jwt = ((JwtAuthenticationToken) authentication).getToken();
