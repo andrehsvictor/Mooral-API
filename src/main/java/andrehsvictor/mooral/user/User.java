@@ -98,4 +98,8 @@ public class User implements Serializable {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public void incrementMuralVisitsCount() {
+        this.muralVisitsCount++;
+    }
+
 }
