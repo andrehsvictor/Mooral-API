@@ -56,6 +56,24 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
 
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+      - mooral
+    container_name: mooral-prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    networks:
+      - mooral
+    container_name: mooral-grafana
+    ports:
+      - "3000:3000"
+      
 networks:
   mooral:
     name: mooral-dev-network
