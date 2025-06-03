@@ -1,6 +1,8 @@
 services:
   postgres:
     image: postgres:alpine
+    networks:
+      - mooral
     container_name: mooral-postgres
     ports:
       - "5432:5432"
@@ -11,6 +13,8 @@ services:
 
   redis:
     image: redis:alpine
+    networks:
+      - mooral
     container_name: mooral-redis
     ports:
       - "6379:6379"
@@ -18,6 +22,8 @@ services:
 
   mailhog:
     image: mailhog/mailhog:latest
+    networks:
+      - mooral
     container_name: mooral-mailhog
     ports:
       - "1025:1025"
@@ -27,6 +33,8 @@ services:
 
   minio:
     image: quay.io/minio/minio:latest
+    networks:
+      - mooral
     container_name: mooral-minio
     ports:
       - "9000:9000"
@@ -38,16 +46,20 @@ services:
     
   rabbitmq:
     image: rabbitmq:management-alpine
+    networks:
+      - mooral
     container_name: mooral-rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_mooral_USER: guest
+      RABBITMQ_mooral_PASS: guest
 
   prometheus:
     image: prom/prometheus:latest
+    networks:
+      - mooral
     container_name: mooral-prometheus
     ports:
       - "9090:9090"
@@ -58,6 +70,8 @@ services:
 
   grafana:
     image: grafana/grafana:latest
+    networks:
+      - mooral
     container_name: mooral-grafana
     ports:
       - "3000:3000"
@@ -65,5 +79,6 @@ services:
       - prometheus
 
 networks:
-  default:
+  mooral:
     name: mooral-dev-network
+    driver: bridge
