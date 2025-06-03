@@ -1,0 +1,13 @@
+${AnsiColor.BRIGHT_CYAN}███╗   ███╗ ██████╗  ██████╗ ██████╗  █████╗ ██╗     ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}████╗ ████║██╔═══██╗██╔═══██╗██╔══██╗██╔══██╗██║     ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLUE}██╔████╔██║██║   ██║██║   ██║██████╔╝███████║██║     ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLUE}██║╚██╔╝██║██║   ██║██║   ██║██╔══██╗██╔══██║██║     ${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_MAGENTA}██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║  ██║██║  ██║███████╗${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_MAGENTA}╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝${AnsiColor.DEFAULT}
+
+${AnsiColor.BRIGHT_GREEN}:: Spring Boot ::${AnsiColor.DEFAULT}                    (v${spring-boot.version})
+${AnsiColor.BRIGHT_YELLOW}:: Mooral API  ::${AnsiColor.DEFAULT}                    Ready to serve! 🚀
+
+${AnsiColor.BRIGHT_WHITE}────────────────────────────────────────────────────────────${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_CYAN}  Murals that inspire, connect, and empower communities${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_WHITE}────────────────────────────────────────────────────────────${AnsiColor.DEFAULT}

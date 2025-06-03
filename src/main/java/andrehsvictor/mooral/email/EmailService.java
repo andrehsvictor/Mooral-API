@@ -14,7 +14,7 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${spring.mail.username")
+    @Value("${spring.mail.username:anonymous}")
     private String from;
 
     public void send(String to, String subject, String text) {
