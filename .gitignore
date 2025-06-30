@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Mooral ###
+*.pem
+*.key
+application-dev.yml
+prometheus.yml
