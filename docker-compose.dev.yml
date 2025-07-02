@@ -36,6 +36,17 @@ services:
       MINIO_ROOT_PASSWORD: minio123
     command: server /data --console-address ":9001"
 
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: mooral-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_VHOST: /
+
   mailhog:
     image: mailhog/mailhog:latest
     container_name: mooral-mailhog
