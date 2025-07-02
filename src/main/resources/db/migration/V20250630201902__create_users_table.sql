@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     "role" VARCHAR(255) NOT NULL,
     oauth_provider VARCHAR(255) NOT NULL,
-    oauth_id VARCHAR(255) NOT NULL
+    oauth_id VARCHAR(255)
 );
