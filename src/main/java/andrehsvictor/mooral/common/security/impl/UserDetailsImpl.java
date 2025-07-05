@@ -2,11 +2,13 @@ package andrehsvictor.mooral.common.security.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import andrehsvictor.mooral.user.Role;
 import andrehsvictor.mooral.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +21,11 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
+        Set<Role> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .toList();
+        return authorities;
     }
 
     @Override
