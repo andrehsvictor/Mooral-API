@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify email - Mooral</title>
+</head>
+
+<body>
+    <p>Thank you for registering with Mooral! To complete your registration, please verify your email address by
+        clicking the link below:</p>
+    <p><a th:href="@{${url}}">Verify your email</a></p>
+    <p>This link will expire in <span th:text="${lifetime}"></span>.</p>
+    <p>If you did not register with Mooral, you can safely ignore this email.</p>
+</body>
+
+</html>
