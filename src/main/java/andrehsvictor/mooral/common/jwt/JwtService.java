@@ -43,6 +43,14 @@ public class JwtService {
     @Value("${mooral.jwt.action-token.email-change.lifetime:1h}")
     private Duration emailChangeTokenLifetime;
 
+    public String getType(Jwt jwt) {
+        String type = jwt.getClaimAsString("typ");
+        if (type == null) {
+            throw new UnauthorizedException("Token does not contain a valid 'typ' claim");
+        }
+        return type;
+    }
+
     public UUID getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof JwtAuthenticationToken jwtAuthenticationToken)) {
@@ -77,11 +85,11 @@ public class JwtService {
                 .expiresAt(now.plus(getTokenLifetime(type)))
                 .subject(subject)
                 .claim("typ", type);
-        
+
         if (claims != null) {
             claims.forEach(builder::claim);
         }
-        
+
         return jwtEncoder.encode(JwtEncoderParameters.from(builder.build()));
     }
 
