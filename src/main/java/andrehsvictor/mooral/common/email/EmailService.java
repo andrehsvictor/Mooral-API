@@ -41,6 +41,33 @@ public class EmailService {
         }
     }
 
+    public void sendEmailVerification(String to, String url, String lifetime) {
+        String subject = "Verify your email address - Mooral";
+        String templateName = "verify-email";
+        Map<String, Object> variables = Map.of(
+                "url", url,
+                "lifetime", lifetime);
+        sendUsingTemplate(to, subject, templateName, variables);
+    }
+
+    public void sendPasswordReset(String to, String url, String lifetime) {
+        String subject = "Reset your password - Mooral";
+        String templateName = "reset-password";
+        Map<String, Object> variables = Map.of(
+                "url", url,
+                "lifetime", lifetime);
+        sendUsingTemplate(to, subject, templateName, variables);
+    }
+
+    public void sendEmailChange(String to, String url, String lifetime) {
+        String subject = "Confirm your email change - Mooral";
+        String templateName = "change-email";
+        Map<String, Object> variables = Map.of(
+                "url", url,
+                "lifetime", lifetime);
+        sendUsingTemplate(to, subject, templateName, variables);
+    }
+
     private MimeMessage createMimeMessage(String to, String subject, String text) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
