@@ -84,6 +84,7 @@ public class JwtService {
                 .issuedAt(now)
                 .expiresAt(now.plus(getTokenLifetime(type)))
                 .subject(subject)
+                .id(UUID.randomUUID().toString())
                 .claim("typ", type);
 
         if (claims != null) {
