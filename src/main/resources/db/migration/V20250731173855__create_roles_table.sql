@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS roles (
+    id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    name VARCHAR(50) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    system BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT uk_roles_name UNIQUE (name)
+);
+
+CREATE INDEX idx_roles_name ON roles(name);
