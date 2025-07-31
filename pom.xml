@@ -11,8 +11,8 @@
 	<groupId>io.github.andrehsvictor</groupId>
 	<artifactId>mooral-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mooral-api</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Mooral API</name>
+	<description>An API for the Mooral application, built with Spring Boot.</description>
 	<url/>
 	<licenses>
 		<license/>
