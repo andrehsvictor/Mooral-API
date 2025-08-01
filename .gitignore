@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Mooral API ###
+application-dev.yml
+*.key
+*.pem
+*.pub
+keys/
+certificates/
+certs/
