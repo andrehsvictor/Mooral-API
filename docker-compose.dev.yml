@@ -1,0 +1,76 @@
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    container_name: mooral-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mooral
+    ports:
+      - "5432:5432"
+    restart: on-failure
+
+  mongo:
+    image: mongo:8.0
+    container_name: mooral-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: mooral
+    restart: on-failure
+
+  redis:
+    image: redis:8.0-alpine
+    container_name: mooral-redis
+    ports:
+      - "6379:6379"
+    restart: on-failure
+
+  rabbitmq:
+    image: rabbitmq:4.1-management-alpine
+    container_name: mooral-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: mooral
+      RABBITMQ_DEFAULT_PASS: mooral
+    restart: on-failure
+
+  minio:
+    image: minio/minio:latest
+    container_name: mooral-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    command: server /data --console-address ":9001"
+    restart: on-failure
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mooral-prometheus
+    ports:
+      - "9090:9090"
+    restart: on-failure
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: mooral-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: grafana
+      GF_SECURITY_ADMIN_PASSWORD: grafana
+    depends_on:
+      - prometheus
+    restart: on-failure
+
+networks:
+  default:
+    driver: bridge
+    name: mooral-network
