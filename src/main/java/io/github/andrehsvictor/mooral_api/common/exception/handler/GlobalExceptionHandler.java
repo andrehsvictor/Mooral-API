@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.shared.exception.handler;
+package io.github.andrehsvictor.mooral_api.common.exception.handler;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,14 +18,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import io.github.andrehsvictor.mooral_api.shared.exception.BadRequestException;
-import io.github.andrehsvictor.mooral_api.shared.exception.ForbiddenOperationException;
-import io.github.andrehsvictor.mooral_api.shared.exception.GoneException;
-import io.github.andrehsvictor.mooral_api.shared.exception.ResourceConflictException;
-import io.github.andrehsvictor.mooral_api.shared.exception.ResourceNotFoundException;
-import io.github.andrehsvictor.mooral_api.shared.exception.UnauthorizedException;
-import io.github.andrehsvictor.mooral_api.shared.exception.dto.ErrorDto;
-import io.github.andrehsvictor.mooral_api.shared.exception.dto.ValidationErrorDto;
+import io.github.andrehsvictor.mooral_api.common.exception.BadRequestException;
+import io.github.andrehsvictor.mooral_api.common.exception.ForbiddenOperationException;
+import io.github.andrehsvictor.mooral_api.common.exception.GoneException;
+import io.github.andrehsvictor.mooral_api.common.exception.ResourceConflictException;
+import io.github.andrehsvictor.mooral_api.common.exception.ResourceNotFoundException;
+import io.github.andrehsvictor.mooral_api.common.exception.UnauthorizedException;
+import io.github.andrehsvictor.mooral_api.common.exception.dto.ErrorDto;
+import io.github.andrehsvictor.mooral_api.common.exception.dto.ValidationErrorDto;
 import io.micrometer.tracing.Tracer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

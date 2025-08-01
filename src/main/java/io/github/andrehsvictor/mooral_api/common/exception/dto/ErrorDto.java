@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.shared.exception.dto;
+package io.github.andrehsvictor.mooral_api.common.exception.dto;
 
 import java.util.ArrayList;
 import java.util.List;

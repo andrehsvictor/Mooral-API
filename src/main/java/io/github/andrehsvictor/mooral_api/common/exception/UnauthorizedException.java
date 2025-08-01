@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.shared.exception;
+package io.github.andrehsvictor.mooral_api.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

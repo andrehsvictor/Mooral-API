@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.shared.exception.dto;
+package io.github.andrehsvictor.mooral_api.common.exception.dto;
 
 import lombok.Builder;
 import lombok.Data;
