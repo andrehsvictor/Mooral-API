@@ -32,14 +32,14 @@ public class Session implements Serializable {
     private UUID id = UUID.randomUUID();
 
     @Indexed
-    private UUID sub;
+    private UUID userId;
 
     @Indexed
     private UUID jti;
 
-    private Long iat;
-    private Long exp;
-    private String ip;
-    private String agent;
+    private Long createdAt;
+    private Long expiresAt;
+    private String ipAddress;
+    private String userAgent;
 
 }

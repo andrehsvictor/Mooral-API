@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface SessionRepository extends CrudRepository<Session, UUID> {
 
-    Optional<Session> findBySub(UUID sub);
+    Optional<Session> findByUserId(UUID userId);
 
     Optional<Session> findByJti(UUID jti);
 
