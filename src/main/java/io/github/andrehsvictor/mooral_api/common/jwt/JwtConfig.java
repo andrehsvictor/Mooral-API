@@ -28,22 +28,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtConfig {
 
-    @Value("${mooral.jwt.private-key.path}")
-    private RSAPrivateKey privateKey;
-
-    @Value("${mooral.jwt.public-key.path}")
-    private RSAPublicKey publicKey;
-
     @Bean
-    JwtDecoder jwtDecoder(List<OAuth2TokenValidator<Jwt>> validators) {
-        NimbusJwtDecoder decoder = NimbusJwtDecoder.withPublicKey(publicKey).build();
+    JwtDecoder jwtDecoder(List<OAuth2TokenValidator<Jwt>> validators, JwtProperties jwtProperties) {
+        NimbusJwtDecoder decoder = NimbusJwtDecoder.withPublicKey(jwtProperties.getPublicKey()).build();
         decoder.setJwtValidator(JwtValidators.createDefaultWithValidators(validators));
         return decoder;
     }
 
     @Bean
-    JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(publicKey).privateKey(privateKey).build();
+    JwtEncoder jwtEncoder(JwtProperties jwtProperties) {
+        JWK jwk = new RSAKey.Builder(jwtProperties.getPublicKey()).privateKey(jwtProperties.getPrivateKey()).build();
         JWKSet jwkSet = new JWKSet(jwk);
         JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(jwkSet);
         return new NimbusJwtEncoder(jwkSource);
