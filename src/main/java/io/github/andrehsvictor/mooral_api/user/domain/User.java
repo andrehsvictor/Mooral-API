@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.user;
+package io.github.andrehsvictor.mooral_api.user.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -47,7 +47,7 @@ public class User implements Serializable {
 
     @Builder.Default
     private Boolean emailVerified = false;
-    
+
     private String passwordHash;
 
     @Enumerated(EnumType.STRING)

@@ -1,4 +1,4 @@
-package io.github.andrehsvictor.mooral_api.user;
+package io.github.andrehsvictor.mooral_api.user.domain;
 
 public enum OAuthProvider {
     GOOGLE,
