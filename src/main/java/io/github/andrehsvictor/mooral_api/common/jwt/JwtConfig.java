@@ -28,10 +28,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtConfig {
 
-    @Value("${io.github.andrehsvictor.mooral-api.jwt.private-key-path}")
+    @Value("${mooral.jwt.private-key.path}")
     private RSAPrivateKey privateKey;
 
-    @Value("${io.github.andrehsvictor.mooral-api.jwt.public-key-path}")
+    @Value("${mooral.jwt.public-key.path}")
     private RSAPublicKey publicKey;
 
     @Bean
