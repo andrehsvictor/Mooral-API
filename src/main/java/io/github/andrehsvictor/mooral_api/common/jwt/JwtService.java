@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtService {
 
     private final JwtEncoder jwtEncoder;
+    private final JwtDecoder jwtDecoder;
     private final JwtProperties jwtProperties;
 
     public Jwt encodeAccessToken(Authentication authentication, String sessionId) {
@@ -28,14 +30,19 @@ public class JwtService {
                 .build();
     }
 
-    public Jwt encodeActionToken(Authentication authentication, JwtAction action, Map<String, Object> additionalClaims) {
+    public Jwt encodeActionToken(Authentication authentication, JwtAction action,
+            Map<String, Object> additionalClaims) {
         return createTokenBuilder(authentication)
                 .asActionToken(action)
                 .withClaims(additionalClaims)
                 .build();
     }
-    
+
     public JwtTokenBuilder createTokenBuilder(Authentication authentication) {
         return new JwtTokenBuilder(jwtEncoder, jwtProperties, authentication);
+    }
+
+    public Jwt decode(String token) {
+        return jwtDecoder.decode(token);
     }
 }
