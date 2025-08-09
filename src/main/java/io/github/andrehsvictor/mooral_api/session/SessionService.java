@@ -25,7 +25,6 @@ public class SessionService {
                 .userId(UUID.fromString(jwt.getSubject()))
                 .ipAddress(request.getRemoteAddr())
                 .userAgent(request.getHeader("User-Agent"))
-                .device(request.getHeader("Device"))
                 .createdAt(jwt.getIssuedAt().toEpochMilli())
                 .expiresAt(jwt.getExpiresAt().toEpochMilli())
                 .build();

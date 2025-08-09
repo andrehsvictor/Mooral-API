@@ -38,7 +38,6 @@ public class Session implements Serializable {
 
     private String ipAddress;
     private String userAgent;
-    private String device;
     private Long createdAt;
     private Long expiresAt;
 
