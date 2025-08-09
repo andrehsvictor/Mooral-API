@@ -6,12 +6,12 @@ import java.time.Duration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
-@Configuration
+@Component
 public class JwtProperties {
 
     @Value("${mooral.jwt.issuer:http://localhost:8080}")
