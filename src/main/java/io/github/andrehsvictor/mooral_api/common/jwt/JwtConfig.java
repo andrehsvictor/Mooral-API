@@ -1,10 +1,7 @@
 package io.github.andrehsvictor.mooral_api.common.jwt;
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
@@ -37,9 +34,10 @@ public class JwtConfig {
 
     @Bean
     JwtEncoder jwtEncoder(JwtProperties jwtProperties) {
-        JWK jwk = new RSAKey.Builder(jwtProperties.getPublicKey()).privateKey(jwtProperties.getPrivateKey()).build();
-        JWKSet jwkSet = new JWKSet(jwk);
-        JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(jwkSet);
+        JWK jwk = new RSAKey.Builder(jwtProperties.getPublicKey())
+                .privateKey(jwtProperties.getPrivateKey())
+                .build();
+        JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwkSource);
     }
 
