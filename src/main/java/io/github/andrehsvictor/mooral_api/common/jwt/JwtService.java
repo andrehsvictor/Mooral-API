@@ -25,23 +25,23 @@ public class JwtService {
 
     public Jwt encodeAccessToken(Authentication authentication, String sessionId) {
         Map<String, Object> extraClaims = Map.of(
-            JwtClaim.SESSION_ID.value, sessionId,
-            JwtClaim.SCOPE.value, getScope(authentication)
+            JwtClaim.SESSION_ID.getValue(), sessionId,
+            JwtClaim.SCOPE.getValue(), getScope(authentication)
         );
         return createToken(authentication, JwtType.BEARER, jwtProperties.getAccessTokenLifespan(), extraClaims);
     }
 
     public Jwt encodeRefreshToken(Authentication authentication, String sessionId) {
         Map<String, Object> extraClaims = Map.of(
-            JwtClaim.SESSION_ID.value, sessionId,
-            JwtClaim.SCOPE.value, getScope(authentication)
+            JwtClaim.SESSION_ID.getValue(), sessionId,
+            JwtClaim.SCOPE.getValue(), getScope(authentication)
         );
         return createToken(authentication, JwtType.REFRESH, jwtProperties.getRefreshTokenLifespan(), extraClaims);
     }
 
     public Jwt encodeActionToken(Authentication authentication, JwtAction action, Map<String, Object> additionalClaims) {
         Map<String, Object> extraClaims = new HashMap<>(additionalClaims);
-        extraClaims.put(JwtClaim.ACTION.value, action.value);
+        extraClaims.put(JwtClaim.ACTION.getValue(), action.getValue());
         return createToken(authentication, JwtType.ACTION, jwtProperties.getActionTokenLifespan(), extraClaims);
     }
 
@@ -61,7 +61,7 @@ public class JwtService {
                 .subject(authentication.getName())
                 .issuedAt(now)
                 .expiresAt(expiration)
-                .claim(JwtClaim.TYPE.value, type.value);
+                .claim(JwtClaim.TYPE.getValue(), type.getValue());
 
         extraClaims.forEach(claims::claim);
 

@@ -1,7 +1,9 @@
 package io.github.andrehsvictor.mooral_api.common.jwt;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum JwtClaim {
     TYPE("typ"),
@@ -9,6 +11,5 @@ public enum JwtClaim {
     SCOPE("scope"),
     SESSION_ID("sid");
 
-    final String value;
-
+    private final String value;
 }
